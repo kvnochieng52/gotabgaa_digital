@@ -1,0 +1,68 @@
+.hero { padding: 60px 0 32px; }
+.title {
+  font-size: clamp(2.2rem, 4vw + 1rem, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 16px 0 16px;
+}
+.subtitle {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chip, .chipActive {
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s var(--ease-out);
+}
+.chip:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.chipActive {
+  background: var(--brand-gradient);
+  color: #fff;
+  border-color: transparent;
+}
+
+.section { padding: 32px 0 80px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.skeletonCard {
+  height: 340px;
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent),
+    var(--bg-elevated);
+  background-size: 200% 100%, 100% 100%;
+  animation: shimmer 1.6s infinite linear;
+  border: 1px solid var(--line);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0, 0 0; }
+  100% { background-position: -200% 0, 0 0; }
+}
+
+.empty {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  margin-top: 24px;
+}

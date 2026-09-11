@@ -1,0 +1,98 @@
+.player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Video.js positioning — override its default absolute layout to fill our container */
+.player :global(.video-js) {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.player :global(.vjs-tech) {
+  object-fit: cover;
+}
+
+.video,
+.iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Video.js big play button — brand it */
+.player :global(.vjs-big-play-button) {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 50% !important;
+  width: 88px !important;
+  height: 88px !important;
+  line-height: 84px !important;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+.player :global(.vjs-big-play-button:hover),
+.player :global(.video-js:hover .vjs-big-play-button) {
+  background: linear-gradient(135deg, #E63946 0%, #FF7A1A 55%, #FFA31A 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 20px 60px rgba(230, 57, 70, 0.55);
+}
+.player :global(.vjs-live-display),
+.player :global(.vjs-seek-to-live-control) {
+  color: #fff;
+}
+.player :global(.vjs-live-display::before) {
+  content: '●';
+  color: #E63946;
+  animation: livePulse 1.4s infinite;
+  margin-right: 4px;
+}
+
+/* ---------- FALLBACK PANEL ---------- */
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(230, 57, 70, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255, 122, 26, 0.35) 0%, transparent 60%),
+    #0A0A0C;
+}
+.fallbackInner {
+  max-width: 500px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.fallbackLogo {
+  height: 72px;
+  width: auto;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+.fallbackInner h3 {
+  color: #fff;
+  font-size: 1.15rem;
+  margin: 0;
+  line-height: 1.3;
+}
+.fallbackInner p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+}

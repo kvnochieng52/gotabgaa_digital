@@ -1,0 +1,135 @@
+# ============================================================
+# Gotabgaa Digital — monorepo .gitignore
+# Covers root, frontend (Next.js) and backend (Laravel)
+# ============================================================
+
+# ---------- macOS & OS junk ----------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# ---------- Editor / IDE ----------
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# ---------- Environment & secrets ----------
+.env
+.env.*
+!.env.example
+!.env.local.example
+auth.json
+
+# ---------- Logs ----------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# ============================================================
+# FRONTEND (Next.js + Turbopack)
+# ============================================================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+
+# Turbopack / bundler caches
+frontend/.turbo/
+frontend/.swc/
+frontend/.parcel-cache/
+
+# Testing / coverage
+frontend/coverage/
+frontend/.nyc_output/
+
+# TypeScript
+frontend/next-env.d.ts
+frontend/*.tsbuildinfo
+
+# Vercel
+frontend/.vercel/
+
+# Local envs (allow examples in git)
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Old-website snapshot & DB dump — NEVER commit these:
+#   - Contains user data (emails, hashed passwords)
+#   - Contains full bundled JS from old site
+frontend/gotabgaa_staging.sql
+frontend/live_old_website/node_modules/
+frontend/live_old_website/gotabgaa-frontend/node_modules/
+
+# ============================================================
+# BACKEND (Laravel + Filament)
+# ============================================================
+backend/vendor/
+backend/node_modules/
+backend/public/hot
+backend/public/storage
+backend/public/build/
+
+# Laravel storage — regenerated per env, do not commit runtime data
+backend/storage/*.key
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/storage/framework/testing/
+backend/storage/app/public/
+backend/storage/app/livewire-tmp/
+backend/storage/app/private/
+backend/storage/debugbar/
+backend/storage/pail/
+
+# Database
+backend/database/database.sqlite
+backend/database/database.sqlite-journal
+backend/database/*.sql
+
+# Bootstrap cache
+backend/bootstrap/cache/*.php
+!backend/bootstrap/cache/.gitignore
+
+# Config caches
+backend/.phpunit.result.cache
+backend/.phpunit.cache/
+
+# Local dev tooling
+backend/Homestead.json
+backend/Homestead.yaml
+backend/.rr.yaml
+backend/.env.backup
+backend/.env.production
+
+# Filament
+backend/public/js/filament/
+backend/public/css/filament/
+
+# ---------- Import artifacts (root) ----------
+gotabgaa_staging.sql
+*.dump
+*.bak
+*.tmp
+
+# Uploaded show photos are checked in (they're brand assets),
+# but keep dev snapshots at the root out of the repo:
+/screenshot-*.png
+/tmp-*.png

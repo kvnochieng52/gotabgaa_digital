@@ -1,0 +1,311 @@
+/* ---------- BREAKING TICKER ---------- */
+.tickerBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--brand-gradient);
+  color: #fff;
+  padding: 8px 20px;
+  overflow: hidden;
+  font-size: 0.85rem;
+  font-weight: 500;
+  /* Ticker scrolls off with the page; header takes over the top when sticky.
+     No stacking context here — sits below the sticky header's z-index. */
+  position: relative;
+  z-index: 1;
+}
+
+.tickerLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 12px;
+  border-radius: var(--r-sm);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tickerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation: livePulse 1.4s infinite;
+}
+
+.tickerViewport {
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+
+.tickerTrack {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  white-space: nowrap;
+  animation: ticker 45s linear infinite;
+}
+
+.tickerTrack a {
+  color: #fff;
+}
+.tickerTrack a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- MAIN HEADER ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: var(--header-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.scrolled {
+  background: var(--header-bg-scrolled);
+  border-bottom-color: var(--line);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.branding {
+  display: inline-flex;
+  align-items: center;
+}
+.logo {
+  height: 64px;
+  width: auto;
+  filter: drop-shadow(0 4px 16px rgba(255, 122, 26, 0.25));
+}
+
+/* ---------- NAV ---------- */
+.nav ul {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  align-items: center;
+}
+
+.navLink,
+.navLinkActive {
+  display: inline-block;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  border-radius: var(--r-sm);
+  transition: all 0.2s var(--ease-out);
+  position: relative;
+}
+.navLink:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+.navLinkActive {
+  color: var(--text);
+}
+.navLinkActive::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--brand-gradient);
+  border-radius: 2px;
+}
+
+/* Standout Advertise link */
+.navHighlight,
+.navHighlightActive {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  background: var(--brand-gradient);
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.35);
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  white-space: nowrap;
+  margin-left: 6px;
+}
+.navHighlight::before,
+.navHighlightActive::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  animation: livePulse 1.4s infinite;
+}
+.navHighlight:hover,
+.navHighlightActive:hover {
+  color: #fff;
+  background: var(--brand-gradient);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(230, 57, 70, 0.5);
+}
+
+/* ---------- ACTIONS ---------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  color: var(--text);
+  transition: all 0.2s var(--ease-out);
+}
+.iconBtn:hover {
+  background: var(--bg-hover);
+}
+
+.watchLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--brand-gradient);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--r-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 8px 22px rgba(230, 57, 70, 0.4);
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+.watchLive:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(230, 57, 70, 0.55);
+  color: #fff;
+}
+
+.watchDot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: livePulse 1.4s infinite;
+}
+
+.menuToggle {
+  display: none;
+}
+
+/* ---------- SEARCH DRAWER ---------- */
+.searchDrawer {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 20px;
+  z-index: 200;
+  min-width: 380px;
+  padding: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.2s var(--ease-out) both;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--bg-elevated-2);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  outline: none;
+  font-size: 0.95rem;
+}
+.searchInput:focus {
+  border-color: var(--brand-orange);
+}
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+  }
+  .navOpen {
+    display: block;
+  }
+  .nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 20px;
+    gap: 2px;
+  }
+  .navLink,
+  .navLinkActive {
+    padding: 14px 16px;
+  }
+  .navLinkActive::after {
+    display: none;
+  }
+  .navLinkActive {
+    background: var(--brand-gradient-soft);
+    color: var(--brand-orange);
+  }
+  .menuToggle {
+    display: inline-flex;
+  }
+  .logo {
+    height: 52px;
+  }
+}
+
+@media (max-width: 640px) {
+  .watchLive {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .logo {
+    height: 44px;
+  }
+  .tickerLabel {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+  .searchDrawer {
+    min-width: unset;
+    left: 20px;
+    right: 20px;
+  }
+}

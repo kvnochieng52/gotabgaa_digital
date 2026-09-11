@@ -1,0 +1,70 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: var(--r-pill);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-out);
+}
+.btn:hover .track {
+  border-color: var(--brand-orange);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+.track {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  background: var(--bg-glass);
+  border: 1px solid var(--line-strong);
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.thumb {
+  position: relative;
+  z-index: 3;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.track[data-theme="dark"] .thumb {
+  transform: translateX(0);
+}
+.track[data-theme="light"] .thumb {
+  transform: translateX(30px);
+}
+
+/* Static faces behind the thumb (visual hint of both states) */
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s var(--ease-out);
+}
+.moonFace { left: 8px; }
+.sunFace  { right: 8px; }
+
+.track[data-theme="dark"] .moonFace { opacity: 0; }
+.track[data-theme="dark"] .sunFace  { opacity: 0.6; }
+.track[data-theme="light"] .moonFace { opacity: 0.6; }
+.track[data-theme="light"] .sunFace  { opacity: 0; }

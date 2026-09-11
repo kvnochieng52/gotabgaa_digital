@@ -1,0 +1,48 @@
+.hero {
+  position: relative;
+  padding: 60px 0 40px;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  top: -300px;
+  left: -100px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  filter: blur(90px);
+  background: radial-gradient(circle, rgba(230,57,70,.3), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.heroInner {
+  position: relative;
+  z-index: 2;
+}
+.heroInner h1 {
+  font-size: clamp(3rem, 6vw + 1rem, 6rem);
+  margin: 12px 0 12px;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+.heroInner p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.section { padding: 24px 0 40px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.empty {
+  padding: 60px 24px;
+  text-align: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  color: var(--text-muted);
+}

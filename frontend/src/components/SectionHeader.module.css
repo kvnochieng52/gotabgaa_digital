@@ -1,0 +1,41 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-top: 32px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem);
+  margin-top: 8px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: all 0.2s var(--ease-out);
+}
+
+.cta:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.cta svg {
+  transition: transform 0.2s var(--ease-out);
+}
+.cta:hover svg {
+  transform: translateX(3px);
+}

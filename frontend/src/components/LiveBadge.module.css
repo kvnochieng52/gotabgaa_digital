@@ -1,0 +1,36 @@
+.solid,
+.outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.solid {
+  background: var(--live);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.45);
+}
+
+.outline {
+  border: 1px solid rgba(230, 57, 70, 0.5);
+  color: var(--live);
+  background: rgba(230, 57, 70, 0.08);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: livePulse 1.4s infinite;
+}
+.solid .dot {
+  background: #fff;
+}

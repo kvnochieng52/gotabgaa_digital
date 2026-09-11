@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /tmp/curl-out -w \"HTTP: %{http_code}\\\\n\" --max-time 5 http://localhost:8000/api/v1/categories)",
+      "Bash(bash /tmp/check.sh)",
+      "Bash(bash /tmp/start-servers.sh)",
+      "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin\")",
+      "Bash(bash /tmp/do-import.sh)",
+      "Bash(curl -sI --max-time 10 \"http://localhost:8000/api/proxy.php\")",
+      "Bash(curl -s -o /dev/null -w \"  categories: %{http_code}\\\\n\" http://localhost:8000/api/v1/categories)",
+      "Bash(curl -s --max-time 10 \"http://localhost:8000/api/proxy.php\")",
+      "Bash(curl -s --max-time 10 \"https://staging.gotabgaa.co.ke/api/proxy.php\")",
+      "Bash(/bin/sleep 1)",
+      "Bash(/bin/sleep 3)",
+      "Bash(curl -s -o /dev/null --max-time 5 -w \" categories: %{http_code}\\\\n\" http://localhost:8000/api/v1/categories)",
+      "Bash(curl -s -o /dev/null --max-time 5 -w \" articles: %{http_code}\\\\n\" http://localhost:8000/api/v1/articles)",
+      "Bash(curl -s -o /dev/null --max-time 5 -w \" settings: %{http_code}\\\\n\" http://localhost:8000/api/v1/settings)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'  {len\\(d[\\\\\"data\\\\\"]\\)} articles returned'\\)\")",
+      "Bash(curl -s \"http://localhost:8000/api/v1/articles?limit=5\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null --max-time 3 -w \"  homepage: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:8000/api/v1/breaking-news)",
+      "Bash(curl -sI -L --max-time 8 \"https://picsum.photos/seed/gotabgaa-morning-bulletin/400/600\")",
+      "Bash(curl -sL --max-time 8 -o /tmp/picsum-test.jpg -w \"HTTP: %{http_code}, Size: %{size_download}B, Type: %{content_type}\\\\n\" \"https://picsum.photos/seed/gotabgaa-morning-bulletin/400/600\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('  URL:', d['stream']['tvStreamUrl']\\)\")",
+      "Bash(curl -sI --max-time 10 \"http://102.210.28.247/tmp_hls/tv/index.m3u8\")",
+      "Bash(curl -sv --max-time 10 -o /dev/null \"http://localhost:8000/api/proxy.php\")",
+      "Bash(curl -sv --max-time 10 -H \"Origin: http://localhost:3000\" -o /dev/null \"http://localhost:8000/api/proxy.php\")",
+      "Bash(npm uninstall *)",
+      "Bash(curl -s --max-time 10 \"https://cdnjs.cloudflare.com/ajax/libs/video.js/8.6.0/video.min.js\")",
+      "Bash(curl -sI --max-time 10 \"https://cdnjs.cloudflare.com/ajax/libs/video.js/8.6.0/video.min.js\")",
+      "Bash(curl -s -X POST -H \"Content-Type: application/json\" -d '{\"name\":\"Test User\",\"email\":\"test@example.com\",\"subject\":\"General enquiry\",\"message\":\"Hello world\"}' http://localhost:8000/api/v1/contact)",
+      "Bash(curl -s http://localhost:8000/api/v1/poll)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"option_id\":\"kericho-devt\"}' http://localhost:8000/api/v1/polls/biggest-story-this-week/vote)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"option_id\":\"peace-nandi\"}' http://localhost:8000/api/v1/polls/biggest-story-this-week/vote)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"option_id\":\"peace-nandi\"}' -w '\\\\nHTTP: %{http_code}\\\\n' http://localhost:8000/api/v1/polls/biggest-story-this-week/vote)",
+      "Bash(git branch *)",
+      "Bash(grep -E \"^\\\\.env$|\\\\.env$|database\\\\.sqlite|gotabgaa_staging\\\\.sql|auth\\\\.json\")",
+      "Bash(awk -F/ 'NF>=2 {print $1\"/\"$2}')"
+    ]
+  }
+}

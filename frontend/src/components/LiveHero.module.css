@@ -1,0 +1,264 @@
+/* ============ CINEMATIC LIVE HERO ============ */
+.hero {
+  position: relative;
+  padding: 64px 0 72px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.orbA,
+.orbB {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+.orbA {
+  width: 620px;
+  height: 620px;
+  top: -180px;
+  left: -140px;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.45) 0%, transparent 70%);
+  animation: floatOrb 12s ease-in-out infinite;
+}
+.orbB {
+  width: 520px;
+  height: 520px;
+  bottom: -140px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(255, 122, 26, 0.45) 0%, transparent 70%);
+  animation: floatOrb 14s ease-in-out infinite reverse;
+}
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* ---------- PLAYER ---------- */
+.playerCol {
+  perspective: 1400px;
+}
+
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  transform: rotateY(-6deg) rotateX(2deg);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    var(--glow-orange);
+  transition: transform 0.6s var(--ease-out);
+}
+.player:hover {
+  transform: rotateY(0) rotateX(0);
+}
+
+.playerFill {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+}
+
+.playerInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(230, 57, 70, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255, 122, 26, 0.4) 0%, transparent 60%),
+    #0A0A0C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playerLogo {
+  width: 45%;
+  height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  animation: floatLogo 4s ease-in-out infinite;
+}
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.playerLive {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+}
+
+.playerPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 6px;
+  z-index: 3;
+  transition: all 0.3s var(--ease-out);
+}
+.playerPlay svg { width: 28px; height: 28px; }
+.playerPlay:hover {
+  background: var(--brand-gradient);
+  border-color: transparent;
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 20px 60px rgba(230, 57, 70, 0.55);
+}
+
+.playerScanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0 2px,
+    transparent 2px 5px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+}
+
+.playerFoot {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.playerFootLabel {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.playerFootBadges {
+  display: inline-flex;
+  gap: 8px;
+}
+.quality,
+.stereo,
+.captions {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+.quality {
+  background: rgba(255, 122, 26, 0.15);
+  color: var(--brand-orange);
+  border: 1px solid rgba(255, 122, 26, 0.4);
+}
+.stereo,
+.captions {
+  background: var(--bg-glass);
+  color: var(--text-muted);
+  border: 1px solid var(--line-strong);
+}
+
+/* ---------- POLL COLUMN ---------- */
+.pollCol {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.pollCtas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.pollPrimaryBtn,
+.pollGhostBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out),
+              border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.pollPrimaryBtn {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(230, 57, 70, 0.4);
+}
+.pollPrimaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(230, 57, 70, 0.55);
+  color: #fff;
+}
+
+.pollGhostBtn {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+.pollGhostBtn:hover {
+  border-color: var(--brand-orange);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--text);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1200px) {
+  .inner { grid-template-columns: 6fr 4fr; }
+}
+@media (max-width: 1024px) {
+  .inner { grid-template-columns: 1fr; gap: 40px; }
+  .player { transform: none; }
+  .hero { padding: 56px 0 72px; }
+}
