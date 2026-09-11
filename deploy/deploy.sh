@@ -11,12 +11,12 @@
 #   6. Builds Next.js static export
 #   7. Reloads nginx + PHP-FPM
 #
-# Run from /var/www/gotabgaa on the server:
+# Run from /app/gotabgaa on the server:
 #     sudo bash deploy/deploy.sh
 # ============================================================
 set -euo pipefail
 
-APP_DIR="/var/www/gotabgaa"
+APP_DIR="/app/gotabgaa"
 BACKEND="$APP_DIR/backend"
 FRONTEND="$APP_DIR/frontend"
 

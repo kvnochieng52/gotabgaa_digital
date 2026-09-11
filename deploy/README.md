@@ -53,11 +53,11 @@ SQL
 ## First-time deploy
 
 ```bash
-# 1. Clone into /var/www
-sudo mkdir -p /var/www
-cd /var/www
-sudo git clone git@github.com:kvnochieng52/gotabgaa_digital.git gotabgaa
-sudo chown -R www-data:www-data /var/www/gotabgaa
+# 1. Clone into /app
+sudo mkdir -p /app
+cd /app
+sudo git clone https://github.com/kvnochieng52/gotabgaa_digital.git gotabgaa
+sudo chown -R www-data:www-data /app/gotabgaa
 
 # 2. Backend .env
 cd gotabgaa
@@ -96,7 +96,7 @@ sudo ufw allow 8090/tcp
 After the first-time setup, deploying updates from `main` is one command:
 
 ```bash
-cd /var/www/gotabgaa
+cd /app/gotabgaa
 sudo bash deploy/deploy.sh
 ```
 
@@ -117,7 +117,7 @@ you want. Also update:
 Then rebuild the frontend and reload nginx:
 
 ```bash
-sudo -u www-data npm --prefix /var/www/gotabgaa/frontend run build
+sudo -u www-data npm --prefix /app/gotabgaa/frontend run build
 sudo systemctl reload nginx
 ```
 
@@ -168,8 +168,8 @@ The SSR config proxies `/` to `127.0.0.1:3120` where the Node process runs.
 DB connection issue or missing `APP_KEY`.
 
 **403 on `/`** — the frontend hasn't been built yet, or `frontend/out/` isn't
-readable by nginx. Run `sudo -u www-data npm --prefix /var/www/gotabgaa/frontend
-run build` and check permissions with `ls -la /var/www/gotabgaa/frontend/out/`.
+readable by nginx. Run `sudo -u www-data npm --prefix /app/gotabgaa/frontend
+run build` and check permissions with `ls -la /app/gotabgaa/frontend/out/`.
 
 **HLS stream returns 502** — the upstream RTMP server firewalls off external
 IPs. Confirm the server IP is allowed on the upstream (`102.210.28.247`), or
