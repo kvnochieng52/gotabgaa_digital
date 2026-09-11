@@ -36,7 +36,10 @@
       "Bash(curl -s -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"option_id\":\"peace-nandi\"}' -w '\\\\nHTTP: %{http_code}\\\\n' http://localhost:8000/api/v1/polls/biggest-story-this-week/vote)",
       "Bash(git branch *)",
       "Bash(grep -E \"^\\\\.env$|\\\\.env$|database\\\\.sqlite|gotabgaa_staging\\\\.sql|auth\\\\.json\")",
-      "Bash(awk -F/ 'NF>=2 {print $1\"/\"$2}')"
+      "Bash(awk -F/ 'NF>=2 {print $1\"/\"$2}')",
+      "Bash(git commit -m ' *)",
+      "Bash(ssh -T -o StrictHostKeyChecking=accept-new -o ConnectTimeout=8 git@github.com)",
+      "Bash(git commit --amend -m ' *)"
     ]
   }
 }

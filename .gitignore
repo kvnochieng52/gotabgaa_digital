@@ -86,18 +86,14 @@ backend/public/hot
 backend/public/storage
 backend/public/build/
 
-# Laravel storage — regenerated per env, do not commit runtime data
+# Laravel storage — ignore runtime contents but KEEP the directory tree.
+# Each subdir ships a `.gitignore` that says `*` + `!.gitignore` so the folders
+# themselves are committed (Laravel needs them to exist on boot) but their
+# generated contents (cache, sessions, views, logs) are not.
 backend/storage/*.key
-backend/storage/logs/
-backend/storage/framework/cache/
-backend/storage/framework/sessions/
-backend/storage/framework/views/
-backend/storage/framework/testing/
-backend/storage/app/public/
-backend/storage/app/livewire-tmp/
-backend/storage/app/private/
 backend/storage/debugbar/
 backend/storage/pail/
+backend/storage/app/livewire-tmp/
 
 # Database
 backend/database/database.sqlite
