@@ -1,0 +1,43 @@
+; ============================================================
+; Gotabgaa Digital — Next.js SSR frontend
+;
+; ONLY needed if you use gotabgaa-ssr.conf (not the static-export
+; nginx config). For static export, delete this file.
+;
+; Install:
+;   sudo cp deploy/systemd/gotabgaa-frontend.service /etc/systemd/system/
+;   sudo systemctl daemon-reload
+;   sudo systemctl enable --now gotabgaa-frontend
+;   sudo systemctl status gotabgaa-frontend
+; ============================================================
+[Unit]
+Description=Gotabgaa Digital — Next.js frontend (SSR)
+Documentation=https://github.com/kvnochieng52/gotabgaa_digital
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/gotabgaa/frontend
+
+Environment=NODE_ENV=production
+Environment=PORT=3120
+Environment=HOST=127.0.0.1
+# Match what's in frontend/.env.production
+Environment=NEXT_PUBLIC_API_URL=http://SERVER_IP:8090
+
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/www/gotabgaa/frontend
+
+[Install]
+WantedBy=multi-user.target
