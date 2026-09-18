@@ -43,7 +43,9 @@
       "Bash(git commit -m 'Fix Laravel cache path error on fresh clones *)",
       "Bash(git commit -m 'Fix first-build failure when API isn'\\\\''t up yet *)",
       "Bash(DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=gotabgaa_export DB_USERNAME=root DB_PASSWORD='' php artisan import:staging --fresh)",
-      "Bash(DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=gotabgaa_export DB_USERNAME=root DB_PASSWORD='' php artisan tinker '--execute= *)"
+      "Bash(DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=gotabgaa_export DB_USERNAME=root DB_PASSWORD='' php artisan tinker '--execute= *)",
+      "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/development/flutter/bin:$HOME/flutter/bin\")",
+      "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/development/flutter/bin\")"
     ]
   }
 }

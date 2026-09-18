@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Allows plain-HTTP requests to the backend during the pre-domain phase
+    (69.30.235.169:8090) plus localhost for local dev builds.
+    Once you attach a domain + certbot, this whole file can be deleted and
+    android:usesCleartextTraffic removed from AndroidManifest.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">69.30.235.169</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">102.210.28.247</domain>
+    </domain-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

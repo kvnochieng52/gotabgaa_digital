@@ -125,6 +125,48 @@ gotabgaa_staging.sql
 *.bak
 *.tmp
 
+# ============================================================
+# MOBILE APP (Flutter — app/)
+# ============================================================
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.metadata
+app/.packages
+app/build/
+app/.pub-cache/
+app/.pub/
+
+# Android build output
+app/android/.gradle/
+app/android/app/debug/
+app/android/app/profile/
+app/android/app/release/
+app/android/local.properties
+app/android/**/*.keystore
+app/android/key.properties
+app/android/gradle-wrapper.jar
+
+# iOS build output + Pods
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+app/ios/Flutter/App.framework
+app/ios/Flutter/flutter_export_environment.sh
+app/ios/Runner/GeneratedPluginRegistrant.*
+app/ios/ServiceDefinitions.json
+app/ios/Runner.xcodeproj/**/xcuserdata/
+app/ios/Runner.xcodeproj/xcshareddata/
+app/ios/Runner.xcworkspace/xcuserdata/
+app/ios/Runner.xcworkspace/xcshareddata/
+
+# IDEs
+app/.idea/
+app/*.iml
+app/*.ipr
+app/*.iws
+
 # Uploaded show photos are checked in (they're brand assets),
 # but keep dev snapshots at the root out of the repo:
 /screenshot-*.png
