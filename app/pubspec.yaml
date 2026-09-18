@@ -26,9 +26,6 @@ dependencies:
   # --- Images & caching ---
   cached_network_image: ^3.4.1
 
-  # --- HTML rendering for article bodies ---
-  flutter_html: ^3.0.0
-
   # --- URL launching (email, phone, social) ---
   url_launcher: ^6.3.1
 

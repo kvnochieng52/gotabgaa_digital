@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -9,6 +8,7 @@ import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/article_card.dart';
 import '../widgets/poster_image.dart';
+import '../widgets/rich_article_body.dart';
 
 class ArticleScreen extends StatefulWidget {
   final String slug;
@@ -213,28 +213,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-            child: Html(
-              data: a.body ?? a.excerpt ?? '',
-              style: {
-                'body': Style(
-                  fontSize: FontSize(16),
-                  lineHeight: LineHeight(1.6),
-                  color: AppColors.textLightDim,
-                  margin: Margins.zero,
-                ),
-                'h2': Style(
-                  fontSize: FontSize(22),
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textLight,
-                  margin: Margins.only(top: 16, bottom: 8),
-                ),
-                'p': Style(margin: Margins.only(bottom: 12)),
-                'a': Style(color: AppColors.brandRed),
-              },
-              onLinkTap: (url, _, __) {
-                if (url != null) launchUrl(Uri.parse(url));
-              },
-            ),
+            child: RichArticleBody(html: a.body ?? a.excerpt ?? ''),
           ),
         ),
 
