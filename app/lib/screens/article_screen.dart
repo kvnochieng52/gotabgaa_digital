@@ -7,6 +7,7 @@ import '../models/article.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/article_card.dart';
+import '../widgets/article_comments_section.dart';
 import '../widgets/poster_image.dart';
 import '../widgets/rich_article_body.dart';
 
@@ -234,6 +235,11 @@ class _ArticleScreenState extends State<ArticleScreen> {
               ),
             ),
           ),
+
+        // ---- Comments ----
+        SliverToBoxAdapter(
+          child: ArticleCommentsSection(articleSlug: a.slug),
+        ),
 
         // ---- Related ----
         if (_related.isNotEmpty) ...[

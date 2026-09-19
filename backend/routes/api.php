@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleCommentController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\BreakingNewsController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\LiveChatController;
 use App\Http\Controllers\Api\PollController;
 use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\SettingsController;
@@ -44,4 +46,18 @@ Route::prefix('v1')->group(function () {
 
     // Contact form submission
     Route::post('contact', [ContactController::class, 'store'])->middleware('throttle:5,1');
+
+    // Live chat (today's active room + past days archive)
+    Route::get('live-chat', [LiveChatController::class, 'index']);
+    Route::get('live-chat/days', [LiveChatController::class, 'days']);
+    Route::post('live-chat', [LiveChatController::class, 'store'])
+        ->middleware('throttle:20,1');
+    Route::post('live-chat/{id}/react', [LiveChatController::class, 'react'])
+        ->whereNumber('id')
+        ->middleware('throttle:60,1');
+
+    // Article comments
+    Route::get('articles/{slug}/comments', [ArticleCommentController::class, 'index']);
+    Route::post('articles/{slug}/comments', [ArticleCommentController::class, 'store'])
+        ->middleware('throttle:10,1');
 });

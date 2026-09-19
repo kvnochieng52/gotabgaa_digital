@@ -61,6 +61,49 @@
   transform: translateY(-2px);
 }
 
+/* --- App download row --- */
+.appRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.appBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s var(--ease-out);
+}
+.appBadge:hover {
+  background: var(--brand-gradient);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.appBadge svg { flex-shrink: 0; }
+.appBadgeLabel {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.appBadgeLabel span:first-child {
+  font-size: 10px;
+  opacity: 0.75;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.appBadgeLabel span:last-child {
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .top h4 {
   font-size: 0.95rem;
   color: #fff;

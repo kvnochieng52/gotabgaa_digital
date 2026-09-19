@@ -3,8 +3,10 @@ import 'package:http/http.dart' as http;
 
 import '../config/api_config.dart';
 import '../models/article.dart';
+import '../models/article_comment.dart';
 import '../models/breaking_news.dart';
 import '../models/category.dart';
+import '../models/live_chat.dart';
 import '../models/poll.dart';
 import '../models/settings.dart';
 
@@ -69,12 +71,16 @@ class ApiService {
     String? category,
     bool? breaking,
     bool? featured,
+    String? search,
   }) async {
     final params = <String>[];
     params.add('limit=$limit');
     if (category != null) params.add('category=$category');
     if (breaking == true) params.add('breaking=1');
     if (featured == true) params.add('featured=1');
+    if (search != null && search.trim().isNotEmpty) {
+      params.add('search=${Uri.encodeQueryComponent(search.trim())}');
+    }
     final res = await _get('/articles?${params.join('&')}') as Map<String, dynamic>;
     final data = (res['data'] as List<dynamic>?) ?? [];
     return data
@@ -117,6 +123,69 @@ class ApiService {
   Future<Poll> vote(String pollSlug, String optionId) async {
     final res = await _post('/polls/$pollSlug/vote', {'option_id': optionId});
     return Poll.fromJson((res as Map<String, dynamic>)['poll'] as Map<String, dynamic>);
+  }
+
+  // ---------- Live chat ----------
+  Future<LiveChatDay> fetchLiveChat({DateTime? date}) async {
+    final path = date == null
+        ? '/live-chat'
+        : '/live-chat?date=${date.toIso8601String().substring(0, 10)}';
+    final res = await _get(path) as Map<String, dynamic>;
+    return LiveChatDay.fromJson(res);
+  }
+
+  Future<List<LiveChatDaySummary>> fetchLiveChatDays() async {
+    final res = await _get('/live-chat/days') as Map<String, dynamic>;
+    final data = (res['data'] as List<dynamic>?) ?? [];
+    return data
+        .map((d) => LiveChatDaySummary.fromJson(d as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<LiveChatMessage> postLiveChat({
+    required String name,
+    required String message,
+    int? parentId,
+  }) async {
+    final res = await _post('/live-chat', {
+      'name': name,
+      'message': message,
+      'parent_id': ?parentId,
+    });
+    return LiveChatMessage.fromJson(res as Map<String, dynamic>);
+  }
+
+  Future<Map<String, int>> reactLiveChat({
+    required int messageId,
+    required String emoji,
+  }) async {
+    final res = await _post('/live-chat/$messageId/react', {'emoji': emoji})
+        as Map<String, dynamic>;
+    final map = (res['reactions'] as Map<String, dynamic>? ?? {});
+    return map.map((k, v) => MapEntry(k, (v as num).toInt()));
+  }
+
+  // ---------- Article comments ----------
+  Future<List<ArticleComment>> fetchArticleComments(String slug) async {
+    final res = await _get('/articles/$slug/comments') as Map<String, dynamic>;
+    final data = (res['data'] as List<dynamic>?) ?? [];
+    return data
+        .map((c) => ArticleComment.fromJson(c as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<ArticleComment> postArticleComment(
+    String slug, {
+    required String name,
+    String? email,
+    required String body,
+  }) async {
+    final res = await _post('/articles/$slug/comments', {
+      'name': name,
+      if (email != null && email.isNotEmpty) 'email': email,
+      'body': body,
+    });
+    return ArticleComment.fromJson(res as Map<String, dynamic>);
   }
 
   // ---------- Contact form ----------

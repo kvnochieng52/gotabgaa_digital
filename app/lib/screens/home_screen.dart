@@ -8,11 +8,13 @@ import '../theme/app_theme.dart';
 import '../widgets/article_card.dart';
 import '../widgets/breaking_ticker.dart';
 import '../widgets/hls_player.dart';
+import '../widgets/live_chat_widget.dart';
 import '../widgets/live_poll_widget.dart';
 import '../widgets/section_header.dart';
 import 'category_screen.dart';
 import 'live_tv_screen.dart';
 import 'news_screen.dart';
+import 'search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,33 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: CustomScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
-          // ---- App bar with logo + search + theme dot ----
-          SliverAppBar(
-            floating: true,
-            pinned: false,
-            backgroundColor: AppColors.cream,
-            elevation: 0,
-            scrolledUnderElevation: 4,
-            surfaceTintColor: Colors.transparent,
-            title: Row(
-              children: [
-                Image.asset('assets/images/logo.png', height: 44),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const NewsScreen()),
-                    );
-                  },
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-            ),
-            titleSpacing: 16,
-            toolbarHeight: 68,
-          ),
+          // ---- App bar with brand-gradient hero + pill search ----
+          const _HomeHeader(),
 
           // ---- Breaking news ticker ----
           if (_breaking.isNotEmpty)
@@ -103,6 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // ---- Live TV card ----
           SliverToBoxAdapter(child: _LiveTVCard(settings: _settings)),
+
+          // ---- Live conversation (immediately after live stream) ----
+          const SliverToBoxAdapter(child: LiveChatWidget()),
 
           // ---- Live Poll ----
           const SliverToBoxAdapter(child: LivePollWidget()),
@@ -153,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // ---- Rest of the articles ----
             SliverList.separated(
               itemCount: _articles!.length - 1,
-              separatorBuilder: (_, __) => const SizedBox(height: 14),
+              separatorBuilder: (_, _) => const SizedBox(height: 14),
               itemBuilder: (context, i) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ArticleCard(article: _articles![i + 1]),
@@ -284,7 +264,7 @@ class _CategoryStripState extends State<_CategoryStrip> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: _cats.length,
-          separatorBuilder: (_, __) => const SizedBox(width: 8),
+          separatorBuilder: (_, _) => const SizedBox(width: 8),
           itemBuilder: (context, i) {
             final c = _cats[i];
             return ActionChip(
@@ -300,6 +280,242 @@ class _CategoryStripState extends State<_CategoryStrip> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+/// Home screen header. A pinned SliverAppBar with a dark cinematic
+/// background, subtle brand-gradient sheen, the logo, a pill-shaped
+/// search input, and a small "LIVE" chip.
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: true,
+      floating: false,
+      snap: false,
+      backgroundColor: AppColors.ink,
+      elevation: 0,
+      scrolledUnderElevation: 8,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.black.withValues(alpha: 0.4),
+      toolbarHeight: 74,
+      automaticallyImplyLeading: false,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF0A0A0F),
+              Color(0xFF14090C),
+              Color(0xFF0A0A0F),
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: -60,
+              right: -40,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      AppColors.brandRed.withValues(alpha: 0.35),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 2,
+                decoration: const BoxDecoration(
+                  gradient: AppColors.brandGradient,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      titleSpacing: 16,
+      title: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.06),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.08),
+              ),
+            ),
+            child: Image.asset('assets/images/logo.png', height: 34),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _SearchPill(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SearchScreen()),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          _LiveChip(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const LiveTVScreen()),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SearchPill extends StatelessWidget {
+  final VoidCallback onTap;
+  const _SearchPill({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white.withValues(alpha: 0.08),
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(999),
+        onTap: onTap,
+        child: Container(
+          height: 42,
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.12),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.search,
+                  size: 18, color: Colors.white.withValues(alpha: 0.75)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Search news, shows…',
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.65),
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LiveChip extends StatelessWidget {
+  final VoidCallback onTap;
+  const _LiveChip({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(999),
+        onTap: onTap,
+        child: Container(
+          height: 42,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            gradient: AppColors.brandGradient,
+            borderRadius: BorderRadius.circular(999),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.brandRed.withValues(alpha: 0.35),
+                blurRadius: 14,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _PulsingDot(),
+              SizedBox(width: 6),
+              Text(
+                'LIVE',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PulsingDot extends StatefulWidget {
+  const _PulsingDot();
+
+  @override
+  State<_PulsingDot> createState() => _PulsingDotState();
+}
+
+class _PulsingDotState extends State<_PulsingDot>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _c;
+
+  @override
+  void initState() {
+    super.initState();
+    _c = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1100),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0.4, end: 1).animate(_c),
+      child: Container(
+        width: 7,
+        height: 7,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
         ),
       ),
     );

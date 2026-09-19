@@ -28,6 +28,15 @@ class ArticleController extends Controller
             $query->where('breaking', true);
         }
 
+        if ($search = trim($request->string('search')->toString())) {
+            $like = '%' . str_replace(['%', '_'], ['\%', '\_'], $search) . '%';
+            $query->where(function ($q) use ($like) {
+                $q->where('title', 'like', $like)
+                    ->orWhere('excerpt', 'like', $like)
+                    ->orWhere('body', 'like', $like);
+            });
+        }
+
         $limit = min((int) $request->input('limit', 20), 100);
 
         return ArticleResource::collection($query->limit($limit)->get());

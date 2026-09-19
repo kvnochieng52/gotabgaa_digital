@@ -45,7 +45,27 @@
       "Bash(DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=gotabgaa_export DB_USERNAME=root DB_PASSWORD='' php artisan import:staging --fresh)",
       "Bash(DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=gotabgaa_export DB_USERNAME=root DB_PASSWORD='' php artisan tinker '--execute= *)",
       "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/development/flutter/bin:$HOME/flutter/bin\")",
-      "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/development/flutter/bin\")"
+      "Bash(export PATH=\"/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/development/flutter/bin\")",
+      "Bash(git commit -m 'Add Flutter mobile app in app/ *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/api/v1/settings)",
+      "Bash(curl -s http://127.0.0.1:8000/api/v1/settings)",
+      "Bash(curl -s http://127.0.0.1:8000/api/v1/live-chat)",
+      "Bash(ps -p 14450 -o pid,ppid,command)",
+      "Read(//proc/14450/**)",
+      "Bash(curl -sf -o /dev/null http://127.0.0.1:8001/api/v1/settings)",
+      "Bash(curl -sf -o /dev/null http://127.0.0.1:3000)",
+      "Bash(curl -s http://127.0.0.1:8001/api/v1/live-chat)",
+      "Bash(curl -s -o /dev/null -w \"home HTTP %{http_code}\\\\n\" http://127.0.0.1:3000)",
+      "Bash(curl -s -o /dev/null -w \"live-tv HTTP %{http_code}\\\\n\" http://127.0.0.1:3000/live-tv/)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Kip\",\"message\":\"Hello there!\"}' http://127.0.0.1:8001/api/v1/live-chat)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Cheruiyot\",\"message\":\"Hi Kip!\",\"parent_id\":6}' http://127.0.0.1:8001/api/v1/live-chat)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); m=next\\(x for x in d['messages'] if x['id']==6\\); print\\(json.dumps\\(m, indent=2\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"prod live-chat HTTP %{http_code}\\\\n\" http://69.30.235.169:8090/api/v1/live-chat)",
+      "Bash(curl -s -o /dev/null -w \"prod settings HTTP %{http_code}\\\\n\" http://69.30.235.169:8090/api/v1/settings)",
+      "Bash(grep -iE 'deploy|.sh$')",
+      "Bash(curl -s -o /dev/null -w \"prod live-chat: HTTP %{http_code}\\\\n\" http://69.30.235.169:8090/api/v1/live-chat)",
+      "Bash(curl -sf -o /dev/null http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s http://192.168.0.13:8001/api/v1/live-chat)"
     ]
   }
 }

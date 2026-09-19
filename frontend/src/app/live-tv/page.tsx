@@ -1,4 +1,5 @@
 import { LiveBadge } from "@/components/LiveBadge";
+import { LiveChat } from "@/components/LiveChat";
 import { PosterImage } from "@/components/PosterImage";
 import { VideoCard } from "@/components/VideoCard";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -60,6 +61,13 @@ export default function LiveTVPage() {
               <button aria-label="Fullscreen"><FullscreenIcon /></button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className="container">
+          <SectionHeader eyebrow="Join the room" title="Live conversation" />
+          <LiveChat />
         </div>
       </section>
 

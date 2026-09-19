@@ -108,6 +108,102 @@ export async function getActivePoll(): Promise<ApiPoll | null> {
   return res.poll;
 }
 
+// ---------- Live chat ----------
+export interface ApiLiveChatMessage {
+  id: number;
+  parent_id: number | null;
+  name: string;
+  message: string;
+  created_at: string;
+  reactions: Record<string, number>;
+  replies?: ApiLiveChatMessage[];
+}
+
+export interface ApiLiveChatDay {
+  date: string; // YYYY-MM-DD
+  is_today: boolean;
+  messages: ApiLiveChatMessage[];
+  allowed_emojis: string[];
+}
+
+export interface ApiLiveChatDaySummary {
+  date: string;
+  count: number;
+}
+
+export async function getLiveChat(date?: string): Promise<ApiLiveChatDay> {
+  const path = date ? `/live-chat?date=${encodeURIComponent(date)}` : "/live-chat";
+  return apiFetch<ApiLiveChatDay>(path);
+}
+
+export async function getLiveChatDays(): Promise<ApiLiveChatDaySummary[]> {
+  const res = await apiFetch<{ data: ApiLiveChatDaySummary[] }>("/live-chat/days");
+  return res.data;
+}
+
+export async function postLiveChat(
+  name: string,
+  message: string,
+  parentId?: number | null,
+): Promise<ApiLiveChatMessage> {
+  const url = `${API_BASE}/api/v1/live-chat`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      name,
+      message,
+      ...(parentId ? { parent_id: parentId } : {}),
+    }),
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.message ?? "Failed to post message");
+  return body as ApiLiveChatMessage;
+}
+
+export async function reactLiveChat(
+  id: number,
+  emoji: string,
+): Promise<Record<string, number>> {
+  const url = `${API_BASE}/api/v1/live-chat/${id}/react`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ emoji }),
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.message ?? "Failed to react");
+  return body.reactions as Record<string, number>;
+}
+
+// ---------- Article comments ----------
+export interface ApiArticleComment {
+  id: number;
+  name: string;
+  body: string;
+  created_at: string;
+}
+
+export async function getArticleComments(slug: string): Promise<ApiArticleComment[]> {
+  const res = await apiFetch<{ data: ApiArticleComment[] }>(`/articles/${slug}/comments`);
+  return res.data;
+}
+
+export async function postArticleComment(
+  slug: string,
+  payload: { name: string; email?: string; body: string },
+): Promise<ApiArticleComment> {
+  const url = `${API_BASE}/api/v1/articles/${slug}/comments`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.message ?? "Failed to post comment");
+  return body as ApiArticleComment;
+}
+
 export async function voteOnPoll(slug: string, optionId: string): Promise<ApiPoll> {
   const url = `${API_BASE}/api/v1/polls/${encodeURIComponent(slug)}/vote`;
   const res = await fetch(url, {

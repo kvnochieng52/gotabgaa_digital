@@ -31,6 +31,21 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+            <div className={styles.appRow}>
+              <a
+                href="https://play.google.com/store/apps/details?id=co.ke.gotabgaa.digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.appBadge}
+                aria-label="Get it on Google Play"
+              >
+                <PlayStoreIcon />
+                <span className={styles.appBadgeLabel}>
+                  <span>Get it on</span>
+                  <span>Google Play</span>
+                </span>
+              </a>
+            </div>
           </div>
 
           <div>
@@ -86,3 +101,4 @@ function XIcon() { return (<svg width="16" height="16" viewBox="0 0 24 24" fill=
 function InstagramIcon() { return (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>); }
 function YouTubeIcon() { return (<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.7-.5-5.4a2.8 2.8 0 0 0-2-2C18.9 4 12 4 12 4s-6.9 0-8.5.6a2.8 2.8 0 0 0-2 2C1 8.3 1 12 1 12s0 3.7.5 5.4c.3 1 1 1.7 2 2 1.6.6 8.5.6 8.5.6s6.9 0 8.5-.6a2.8 2.8 0 0 0 2-2c.5-1.7.5-5.4.5-5.4Zm-13 3.5V8.5l6 3.5-6 3.5Z"/></svg>); }
 function WhatsAppIcon() { return (<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 2.7 17.1L1 23l6-1.5a11 11 0 0 0 5 1.2 11 11 0 0 0 8.5-19.2ZM12 20.8a9 9 0 0 1-4.5-1.2l-.4-.2-3.5.9.9-3.4-.2-.4A9 9 0 1 1 12 20.8Zm5-6.7c-.3-.1-1.6-.8-1.8-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.4-1.5-.9-.8-1.5-1.7-1.6-2s0-.4.1-.6c.1-.1.3-.3.4-.5.1-.1.2-.2.3-.4 0-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.1 4.6 2.5 1.1 3 .9 3.6.9.6 0 1.8-.8 2-1.5.2-.7.2-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/></svg>); }
+function PlayStoreIcon() { return (<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.9c-.4.3-.6.7-.6 1.3v17.6c0 .6.2 1 .6 1.3l10-10.6-10-9.6z"/><path d="m14.6 12.4 3.2-3.4L4.9 1.5l9.7 10.9z" opacity=".9"/><path d="m14.6 12.4-9.7 10.9 12.9-7.5-3.2-3.4z" opacity=".9"/><path d="M20.9 10.3 17.8 9l-3.2 3.4 3.2 3.4 3.1-1.3c1.2-.7 1.2-2.5 0-3.2z" opacity=".95"/></svg>); }

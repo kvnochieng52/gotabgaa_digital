@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PosterImage } from "@/components/PosterImage";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ArticleComments } from "@/components/ArticleComments";
 import { getArticle, getArticles, apiToCardArticle, type ApiArticle } from "@/lib/api";
 import { formatDate, timeAgo } from "@/lib/format";
 import type { Article } from "@/lib/types";
@@ -111,6 +112,8 @@ export function ArticleView({ slug }: ArticleViewProps) {
             {(article.body ?? article.excerpt ?? "").split("\n\n").map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
+
+            <ArticleComments slug={article.slug} />
           </div>
 
           <aside className={styles.sidebar}>

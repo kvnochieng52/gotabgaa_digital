@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId = "co.ke.gotabgaa.digital"
         // video_player + youtube_player_flutter require API 21+
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

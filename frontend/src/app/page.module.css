@@ -190,22 +190,34 @@
 .newsletterForm {
   position: relative;
   display: flex;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--r-pill);
   padding: 6px;
+  transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+.newsletterForm:focus-within {
+  border-color: rgba(255, 122, 26, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.18);
 }
 .newsletterForm input {
   flex: 1;
   background: transparent;
   border: 0;
   outline: none;
-  color: var(--text);
+  color: #fff;
   padding: 14px 20px;
   font-size: 0.95rem;
+  font-weight: 500;
+  min-width: 0;
 }
 .newsletterForm input::placeholder {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.55);
+}
+.newsletterForm input:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.06) inset;
+  caret-color: #fff;
 }
 .newsletterForm button {
   background: var(--brand-gradient);
