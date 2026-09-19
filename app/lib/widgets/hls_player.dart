@@ -104,11 +104,7 @@ class _HlsPlayerState extends State<HlsPlayer> {
     return AspectRatio(
       aspectRatio: widget.aspectRatio,
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        clipBehavior: Clip.antiAlias,
+        color: Colors.black,
         child: _buildBody(),
       ),
     );

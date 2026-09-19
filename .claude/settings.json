@@ -65,7 +65,10 @@
       "Bash(grep -iE 'deploy|.sh$')",
       "Bash(curl -s -o /dev/null -w \"prod live-chat: HTTP %{http_code}\\\\n\" http://69.30.235.169:8090/api/v1/live-chat)",
       "Bash(curl -sf -o /dev/null http://192.168.0.13:8001/api/v1/live-chat)",
-      "Bash(curl -s http://192.168.0.13:8001/api/v1/live-chat)"
+      "Bash(curl -s http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s -o /dev/null -w \"prod POST live-chat: HTTP %{http_code}\\\\n\" -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"test\"}' http://69.30.235.169:8090/api/v1/live-chat)",
+      "Bash(curl -s -o /dev/null -w \"local POST live-chat: HTTP %{http_code}\\\\n\" -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"test\"}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"name\":\"MobileTest\",\"message\":\"hello from test\"}' http://192.168.0.13:8001/api/v1/live-chat)"
     ]
   }
 }

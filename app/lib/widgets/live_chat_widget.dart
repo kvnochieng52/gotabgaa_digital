@@ -147,10 +147,14 @@ class _LiveChatWidgetState extends State<LiveChatWidget> {
         });
         _scrollToBottomIfNeeded();
       }
-    } catch (_) {
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not send message')),
+          SnackBar(
+            content: Text('Send failed: $e'),
+            duration: const Duration(seconds: 6),
+            behavior: SnackBarBehavior.floating,
+          ),
         );
       }
     } finally {
@@ -346,9 +350,14 @@ class _LiveChatWidgetState extends State<LiveChatWidget> {
 
   Widget _messagesArea() {
     if (_loading && _day == null) {
-      return const SizedBox(
-        height: 220,
-        child: Center(child: CircularProgressIndicator()),
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 20),
+        child: Center(
+          child: SizedBox(
+            width: 22, height: 22,
+            child: CircularProgressIndicator(strokeWidth: 2.4),
+          ),
+        ),
       );
     }
     if (_error != null && _day == null) {
@@ -384,13 +393,23 @@ class _LiveChatWidgetState extends State<LiveChatWidget> {
     }
     final messages = _day?.messages ?? const <LiveChatMessage>[];
     if (messages.isEmpty) {
-      return const SizedBox(
-        height: 200,
-        child: Center(
-          child: Text(
-            'No messages yet — start the conversation!',
-            style: TextStyle(color: AppColors.textLightMuted),
-          ),
+      return const Padding(
+        padding: EdgeInsets.fromLTRB(14, 10, 14, 12),
+        child: Row(
+          children: [
+            Icon(Icons.forum_outlined,
+                size: 16, color: AppColors.textLightMuted),
+            SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                'No messages yet — start the conversation!',
+                style: TextStyle(
+                  color: AppColors.textLightMuted,
+                  fontSize: 12.5,
+                ),
+              ),
+            ),
+          ],
         ),
       );
     }
