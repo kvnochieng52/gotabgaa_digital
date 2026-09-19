@@ -52,7 +52,8 @@ class ApiService {
     final decoded = res.body.isEmpty ? {} : json.decode(res.body);
     if (res.statusCode < 200 || res.statusCode >= 300) {
       final msg = (decoded is Map) ? (decoded['message']?.toString() ?? 'Error') : 'Error';
-      throw ApiException(msg, statusCode: res.statusCode);
+      throw ApiException('$msg (${uri.host}${uri.path})',
+          statusCode: res.statusCode);
     }
     return decoded;
   }

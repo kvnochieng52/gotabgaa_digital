@@ -68,7 +68,14 @@
       "Bash(curl -s http://192.168.0.13:8001/api/v1/live-chat)",
       "Bash(curl -s -o /dev/null -w \"prod POST live-chat: HTTP %{http_code}\\\\n\" -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"test\"}' http://69.30.235.169:8090/api/v1/live-chat)",
       "Bash(curl -s -o /dev/null -w \"local POST live-chat: HTTP %{http_code}\\\\n\" -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"test\"}' http://192.168.0.13:8001/api/v1/live-chat)",
-      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"name\":\"MobileTest\",\"message\":\"hello from test\"}' http://192.168.0.13:8001/api/v1/live-chat)"
+      "Bash(curl -s -X POST -H 'Content-Type: application/json' -d '{\"name\":\"MobileTest\",\"message\":\"hello from test\"}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"CurlTest\",\"message\":\"basic test\"}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"CurlTest\",\"message\":\"with null\",\"parent_id\":null}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -s -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"CurlTest\",\"message\":\"reply test\",\"parent_id\":1}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -v -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"hi\"}' http://69.30.235.169:8090/api/v1/live-chat)",
+      "Bash(curl -sw '\\\\nHTTP %{http_code}\\\\n' -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"hello\"}' http://192.168.0.13:8001/api/v1/live-chat)",
+      "Bash(curl -sw \"HTTP %{http_code}\\\\n\" -o /dev/null http://192.168.0.13:8001/api/v1/settings)",
+      "Bash(curl -sw '\\\\nHTTP %{http_code}\\\\n' -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"message\":\"hello\"}' http://69.30.235.169:8090/api/v1/live-chat)"
     ]
   }
 }
